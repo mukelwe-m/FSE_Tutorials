@@ -1,7 +1,6 @@
 from decimal import Decimal, InvalidOperation
 from typing import List, Tuple
 
-
 # Constants
 CURRENCY_SYMBOL = "R"
 # TODO: Remove the TRANSACTION_TYPES constant below - we are not using it in the Transaction class
@@ -9,7 +8,7 @@ CURRENCY_SYMBOL = "R"
 
 class Transaction:
     def __init__(self, date, description, amount, category):
-        self.date = date # use the class object instead of a dict, so we can use dot notation (t.amount instead of t['amount'])  
+        self.date = date  # use the class object instead of a dict, so we can use dot notation (t.amount instead of t['amount'])
         self.description = description
         try:
             self.amount = Decimal(amount)
@@ -37,16 +36,21 @@ def calculate_total_expenses(transactions: List[Transaction]) -> Decimal:
         Decimal('-2000.00')
     """
     run_total = Decimal(0)
-   
-    for transaction in transactions: # for every item in this list of transactions
-        if transaction.amount < 0: # accessing class property using property name. is the amount negative
-            run_total += transaction.amount # if it is negative, add it to the running total (run_total)
+
+    for transaction in transactions:  # for every item in this list of transactions
+        if (
+            transaction.amount < 0
+        ):  # accessing class property using property name. is the amount negative
+            run_total += (
+                transaction.amount
+            )  # if it is negative, add it to the running total (run_total)
     return run_total
+
 
 # TODO: Implement this function to sum all transactions with positive amounts
 def calculate_total_income(transactions: List[Transaction]) -> Decimal:
     """Calculates the total income from a list of transactions.
-    
+
     Args:
         transactions: A list of Transaction objects.
 
@@ -54,11 +58,16 @@ def calculate_total_income(transactions: List[Transaction]) -> Decimal:
         The total income as a Decimal (should be positive).
     """
     run_total = Decimal(0)
-   
-    for transaction in transactions: # for every item in this list of transactions
-        if transaction.amount > 0: # accessing class property using property name. is the amount positive
-            run_total += transaction.amount # if it is positive, add it to the running total (run_total)
+
+    for transaction in transactions:  # for every item in this list of transactions
+        if (
+            transaction.amount > 0
+        ):  # accessing class property using property name. is the amount positive
+            run_total += (
+                transaction.amount
+            )  # if it is positive, add it to the running total (run_total)
     return run_total
+
 
 # NOTE: This function is already complete - no changes needed here!
 def format_currency(amount: Decimal) -> str:
@@ -76,6 +85,7 @@ def format_currency(amount: Decimal) -> str:
         'R 1234.56'
     """
     return f"{CURRENCY_SYMBOL} {amount:,.2f}"
+
 
 # TODO: Remove the entire add_transaction function below (no longer needed with Transaction class)
 def add_transaction(
@@ -116,6 +126,7 @@ def add_transaction(
     transactions.append(transaction)
     return transactions
 
+
 # TODO: Update this function to work with Transaction objects instead of dicts.
 # Change List[dict] to List[Transaction], use dot notation (t.amount), and update docstring.
 # Hint: With Transaction objects, simply sum all amounts (expenses are negative, income is positive)!
@@ -139,5 +150,7 @@ def calculate_balance(transactions: List[Transaction]) -> Decimal:
         >>> calculate_balance(transactions)
         Decimal('4000')
     """
-    balance = Decimal(calculate_total_income(transactions) + calculate_total_expenses(transactions))
+    balance = Decimal(
+        calculate_total_income(transactions) + calculate_total_expenses(transactions)
+    )
     return balance
