@@ -86,47 +86,6 @@ def format_currency(amount: Decimal) -> str:
     """
     return f"{CURRENCY_SYMBOL} {amount:,.2f}"
 
-
-# TODO: Remove the entire add_transaction function below (no longer needed with Transaction class)
-def add_transaction(
-    transactions: List[dict], description: str, amount: Decimal, transaction_type: str
-) -> List[dict]:
-    """
-    Add a new transaction to the transaction list.
-
-    Args:
-        transactions: The current list of transactions.
-        description: A description of the transaction.
-        amount: The transaction amount (positive value).
-        transaction_type: Either "income" or "expense".
-
-    Returns:
-        The updated transactions list.
-
-    Raises:
-        ValueError: If transaction_type is not valid or amount is negative.
-
-    Example:
-        >>> transactions = []
-        >>> add_transaction(transactions, "Salary", Decimal("5000"), "income")
-        [{'description': 'Salary', 'amount': Decimal('5000'), 'type': 'income'}]
-    """
-    if transaction_type.lower() not in TRANSACTION_TYPES:
-        raise ValueError(f"Transaction type must be one of {TRANSACTION_TYPES}")
-
-    if amount < 0:
-        raise ValueError("Amount must be positive")
-
-    transaction = {
-        "description": description,
-        "amount": amount,
-        "type": transaction_type.lower(),
-    }
-
-    transactions.append(transaction)
-    return transactions
-
-
 # TODO: Update this function to work with Transaction objects instead of dicts.
 # Change List[dict] to List[Transaction], use dot notation (t.amount), and update docstring.
 # Hint: With Transaction objects, simply sum all amounts (expenses are negative, income is positive)!
