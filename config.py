@@ -6,8 +6,8 @@ load_dotenv()
 
 # TODO: Load SECRET_KEY and CURRENCY_SYMBOL from environment variables using python-dotenv
 class Config:
-    SECRET_KEY = "notsosecret"
-    CURRENCY_SYMBOL = "$"
+    SECRET_KEY = os.getenv("SECRET_KEY", "")  # Default to empty string if not set
+    CURRENCY_SYMBOL = os.getenv("CURRENCY_SYMBOL", "R") # Put in "R" if not set to anything.
 
     @classmethod
     def get_currency_symbol(cls : type) -> str:

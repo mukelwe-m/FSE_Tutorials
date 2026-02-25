@@ -4,6 +4,14 @@
 
 In this tutorial, you will learn how to work with environment variables, debug runtime errors, and write comprehensive unit tests. By the end of this tutorial, you will understand how to configure applications securely, handle exceptions gracefully, and test different scenarios thoroughly.
 
+
+Environmment: An environment variable is something we want to access that is outside of our program. For example,git is an application, in our environment. another example of a environment program is pip.
+
+NEVER PUSH YOUR ENVIRONMENT FILE!
+
+Scope
+Variables
+
 ### Learning Objectives
 
 - Load and use environment variables with `python-dotenv`

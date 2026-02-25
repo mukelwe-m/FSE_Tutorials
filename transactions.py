@@ -56,13 +56,20 @@ def check_financial_health(transactions: list[Transaction]) -> str:
         str: A message indicating financial health status, like: "Saving well", or "Overspending".
 
     """
-    total_income = calculate_total_income(transactions)
+    # you can have global variables, but they should be used sparingly and with caution.
+        # functions should ideally be self-contained and not rely on external state, as this can lead to bugs and make the code harder to understand and maintain.
+    total_income = calculate_total_income(transactions) # scope: local variable to store total income
     total_expenses = abs(calculate_total_expenses(transactions))
-    health = total_income / (total_expenses)
-    if (health >= 1):
-        return "Saving well"
-    else:
-        return "Overspending"
+    try: 
+        health = total_income / (total_expenses)
+        if (health >= 1):
+            return "Saving well"
+        else:
+            return "Overspending"
+    except (ZeroDivisionError, InvalidOperation): # division by zero can occur if total_expenses is zero, and InvalidOperation can occur if there are no transactions and we try to calculate income or expenses.
+        if total_income > 0:
+            return "Saving well"  # If we have income but no expenses, we are saving well.
+        return "No transactions recorded!"    
 
 #TODO Examine this function, it seems to be causing an error in app.py? (Hint: This function uses other functions defined above, it might be related to them)
 def calculate_financial_summary(transactions: list[Transaction]) -> dict:
