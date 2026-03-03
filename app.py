@@ -32,9 +32,7 @@ def main():
     finally:
         session.close()
         # TODO: Once you have added the Entertainment category and sample  expenses, uncomment the lines below to display them!
-        # display_transactions_by_category("Job")
-        add_entertainment_category()
-        add_entertainment_expenses()
+        display_transactions_by_category("Job")
         display_transactions_by_category("Entertainment")
 
 
@@ -59,7 +57,7 @@ def add_entertainment_category():
         session.close()
 
 
-# TODO: Add sample entertainment expenses
+# TODO: Add sample entertainment expenses == DONE!
 # NOTE: Fetch the Entertainment category first, then add two sample expenses linked to that category
 def add_entertainment_expenses():
     session = get_session()
@@ -109,7 +107,7 @@ def display_transactions_by_category(category_name: str):
         # Fetch transactions for the category
         transactions = (
             session.query(Transaction)
-            .filter(Transaction.category_ref_id == category.id)
+            .filter(Transaction.category_id == category.id)
             .all()
         )
 
