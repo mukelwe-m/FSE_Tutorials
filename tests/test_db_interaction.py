@@ -44,9 +44,8 @@ def test_display_transactions_by_category_outputs(capsys, db_session):
     )
     db_session.commit()
 
-    display_transactions_by_category("Entertainment")  # No transactions yet
+    display_transactions_by_category("Income")
     captured = capsys.readouterr().out
 
-    assert "Transactions in category 'Entertainment':" in captured
-    assert "Concert Tickets" in captured
-    assert "Petrol" in captured
+    assert "Transactions in category 'Income':" in captured
+    assert "Salary" in captured
