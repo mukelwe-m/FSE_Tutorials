@@ -4,7 +4,8 @@ In this tutorial, we transform our application from a command-line tool into a *
 
 ### Learning Objectives
 
-* Understand what an **API** is and why it separates backend logic from user interfaces.
+* Understand what an **API** is and why it separates backend logic from user interfaces. -> when you go int a website you go to an API endpoint. e.g. \marclevin\ is an endpoint \FSE_Tutorials\ is another.
+* APIs use HTTP protocol
 * Learn how to use **Flask** to build RESTful endpoints.
 * Implement routes that return JSON responses.
 * Handle query parameters to filter data dynamically.

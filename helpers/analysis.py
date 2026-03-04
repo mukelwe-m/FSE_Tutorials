@@ -68,7 +68,7 @@ def create_pie(data, title, filename):
     plt.pie(df["total"], labels=df["label"].tolist(), autopct="%1.1f%%", startangle=140)
     plt.title(title)
 
-    path = os.path.join(STATIC_DIR, filename)
+    path = os.path.join(STATIC_DIR, filename)  # a constant for the static directory
     plt.savefig(path)
     plt.close()
     logger.success(f"Saved: {path}")
@@ -163,11 +163,29 @@ def get_category_names():
         session.close()
 
 
-#TODO Complete the function below, use the helper function provided to convert to dicts otherwise tests will fail.
+# TODO Complete the function below, use the helper function provided to convert to dicts otherwise tests will fail.
 def get_transactions_by_category(category_name: str):
-    pass
+    # First get a session
+    session = get_session()
+    # Then query the database for the category with a given name
+    # If the category exists, get its transactions
+    # if the category doesn't exist or has no transactions, return an empty list
+    # Use the helper function to convert the transactions to dictionaries before returning
+    # Finally, close the session
+    try:
+        stmt = select(Category).where(Category.name == category_name)
+        category = session.execute(stmt).scalars().first()
+        if not category or not category.transactions:
+            logger.info(
+                f"No transactions found for category '{category_name}'."
+            )  # we didnt even ask for this, but cool!
+            return []
+        return convert_transactions_to_dict(category.transactions)
+    finally:
+        session.close()
 
-#NOTE: I have added this helper function to convert Transaction objects to dictionaries for JSON serialization, for use in the function above.
+
+# NOTE: I have added this helper function to convert Transaction objects to dictionaries for JSON serialization, for use in the function above.
 def convert_transactions_to_dict(transactions):
     """Helper function to convert Transaction objects to dictionaries for JSON serialization."""
     return [
