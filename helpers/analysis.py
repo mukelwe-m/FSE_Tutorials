@@ -4,6 +4,7 @@ from loguru import logger
 import matplotlib
 
 from data.database import get_session
+from helpers import transactions
 from helpers.transactions import Category, Transaction
 
 matplotlib.use("Agg")  # Fixes potential backend issues
@@ -245,9 +246,20 @@ def get_all_transactions():
 #TODO Implement the following functions for the new metrics cards in the dashboard
 def get_largest_expense():
     """Fetches the largest single expense (most negative amount)."""
-    pass
+    session = get_session()
+    try:
+        largest_expense =session.query(Transaction).filter(Transaction.amount < 0).order_by(Transaction.amount).first()
+        return largest_expense
+    finally:        
+        session.close()
 
 #TODO Implement the following functions for the new metrics cards in the dashboard
 def get_average_transaction_amount():
     """Calculates the average transaction amount using all transactions."""
-    pass
+    session = get_session()
+    try:
+        transactions = get_all_transactions()
+        avg_transaction = sum(float(t.amount) for t in transactions) / len(transactions) if transactions else 0
+        return avg_transaction
+    finally:
+        session.close()

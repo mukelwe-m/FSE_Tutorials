@@ -45,7 +45,7 @@ def dashboard():
         if path:
             chart_paths[key] = f"/static/{os.path.basename(path)}"
     largest_expense = get_largest_expense()
-
+        
     avg_transaction = get_average_transaction_amount()
 
     category_names = get_category_names()
