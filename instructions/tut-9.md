@@ -272,7 +272,7 @@ You now have a professional CI pipeline that automatically tests your code on ev
        │
        ▼
 ┌──────────────────────┐
-│  ✅ Pass or ❌ Fail  │
+│  ✅ Pass or ❌ Fail │
 └──────────────────────┘
 ```
 
