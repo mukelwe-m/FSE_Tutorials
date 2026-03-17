@@ -27,7 +27,7 @@ def test_format_currency():
 
 def test_calculate_total_expenses(sample_transactions):
     """Test calculating total expenses from a list of transactions."""
-    assert calculate_total_expenses(sample_transactions) == Decimal("-500.00")
+    assert calculate_total_expenses(sample_transactions) == Decimal("500.00")
 
 
 def test_calculate_total_income(sample_transactions):
