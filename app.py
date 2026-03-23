@@ -78,7 +78,7 @@ def add_transaction():
         flash(f"Error adding transaction: {str(e)}", "error")
     if transaction_id is not None:
       # log_transaction_audit_task.delay(transaction_id) #type: ignore
-      pass
+         log_transaction_audit_task.apply_async(args=[transaction_id], countdown=10) # type: ignore
 
     
 
